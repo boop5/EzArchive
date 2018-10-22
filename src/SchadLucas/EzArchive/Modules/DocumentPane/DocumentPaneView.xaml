@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SchadLucas.EzArchive.Modules.DocumentPane.DocumentPaneView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:SchadLucas.EzArchive.Modules.DocumentPane"
+             xmlns:ez="clr-namespace:SchadLucas.EzArchive.WpfControls;assembly=SchadLucas.EzArchive.WpfControls"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance local:DocumentPaneViewModel}">
+
+    <ListBox x:Name="Documents" SelectedItem="{Binding SelectedDocument}">
+        <ListBox.Template>
+            <ControlTemplate>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="0" Padding="0">
+                    <WrapPanel Orientation="Horizontal" IsItemsHost="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.IsVirtualizing="True" Margin="0" />
+                </ScrollViewer>
+            </ControlTemplate>
+        </ListBox.Template>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Viewbox Stretch="Uniform" StretchDirection="Both" Height="96" Width="96" Margin="4">
+                    <ez:DocumentContainer DataContext="{Binding }" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                </Viewbox>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+
+</UserControl>
+

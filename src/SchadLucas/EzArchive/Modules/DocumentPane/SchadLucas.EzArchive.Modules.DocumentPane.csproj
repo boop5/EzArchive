@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FBDCD79-A6ED-4DE9-8636-1E55AA037796}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>SchadLucas.EzArchive.Modules.DocumentPane</RootNamespace>
+    <AssemblyName>SchadLucas.EzArchive.Modules.DocumentPane</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DocumentPaneModel.cs" />
+    <Compile Include="DocumentPaneView.xaml.cs">
+      <DependentUpon>DocumentPaneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentPaneViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DocumentPaneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro">
+      <Version>3.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Caliburn.Micro.Core">
+      <Version>3.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="SchadLucas.Logging">
+      <Version>1.0.180823.211050</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\SchadLucas.EzArchive.Domain.csproj">
+      <Project>{69BB4AB5-223E-49A8-BC9C-F21703E173AF}</Project>
+      <Name>SchadLucas.EzArchive.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Storage\SchadLucas.EzArchive.Storage.csproj">
+      <Project>{E678105D-0EB6-4E3E-B8C3-4E97047C2971}</Project>
+      <Name>SchadLucas.EzArchive.Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WpfControls\SchadLucas.EzArchive.WpfControls.csproj">
+      <Project>{BF612027-D076-43E2-A7FA-CAF08B3117F5}</Project>
+      <Name>SchadLucas.EzArchive.WpfControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

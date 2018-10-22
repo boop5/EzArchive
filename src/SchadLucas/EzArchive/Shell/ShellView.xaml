@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="SchadLucas.EzArchive.Shell.ShellView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SchadLucas.EzArchive.Shell"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance local:ShellViewModel}">
+    
+    <Grid Margin="8">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" MaxWidth="350" />
+        </Grid.ColumnDefinitions>
+
+
+        <ContentControl x:Name="MenuBar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
+        <ContentControl x:Name="Ribbon" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" />
+
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="Navigation">
+            <ContentControl x:Name="NavPane" />
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="Documents" Margin="10,0">
+            <ContentControl x:Name="DocumentPane" />
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="2" Header="Details" Visibility="{Binding DocumentSelected, Converter={StaticResource Converter.Visibility.Boolean}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                </Grid.RowDefinitions>
+                
+                <ContentControl x:Name="Details" Grid.Row="0" />
+                <ContentControl x:Name="Preview" Grid.Row="1" />
+            </Grid>
+        </GroupBox>
+
+        <ContentControl x:Name="StatusBar" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" />
+
+
+    </Grid>
+</UserControl>

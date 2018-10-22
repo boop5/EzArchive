@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="SchadLucas.EzArchive.WpfControls.SearchBoxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SchadLucas.EzArchive.WpfControls"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance local:SearchBoxViewModel}">
+
+    <UserControl.Resources>
+
+        <Style TargetType="Border" x:Key="SearchBox">
+            <Setter Property="BorderThickness" Value="1.25" />
+            <Setter Property="BorderBrush" Value="SkyBlue" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Height" Value="32" />
+        </Style>
+        
+        <ControlTemplate x:Key="HorizontalStackPanelHost">
+            <StackPanel Orientation="Horizontal" IsItemsHost="True" />
+        </ControlTemplate>
+        
+        <Style TargetType="{x:Type Border}" x:Key="Tag">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="4,0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="TagText">
+            <Setter Property="Padding" Value="4,0"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="TagCloseButton">
+            <Setter Property="Text" Value="&#215;" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Gray" />
+                </Trigger>    
+            </Style.Triggers>
+        </Style>
+        
+        <DataTemplate x:Key="TagTemplate">
+            <Border Style="{StaticResource Tag}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="{Binding }" Style="{StaticResource TagText}"/>
+                                
+                    <TextBlock Grid.Column="1" Style="{StaticResource TagCloseButton}"
+                               cal:Message.Attach="[Event MouseLeftButtonUp] = [Action RemoveSearchTag($dataContext)];" />
+
+                </Grid>
+
+            </Border>
+        </DataTemplate>
+        
+        <Style TargetType="{x:Type TextBox}" x:Key="SearchTextBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="4,0" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource SearchBox}">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ItemsControl x:Name="SearchTerms" Grid.Column="0" IsTabStop="False"
+                          Template="{StaticResource HorizontalStackPanelHost}"
+                          ItemTemplate="{StaticResource TagTemplate}" />
+
+            <TextBox x:Name="SearchText" Grid.Column="1" IsTabStop="True"
+                     Style="{StaticResource SearchTextBox}"
+                     cal:Message.Attach="[Event PreviewKeyDown] = [Action OnKeyDown($eventArgs)];" />
+        </Grid>
+
+    </Border>
+
+</UserControl>
